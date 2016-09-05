@@ -125,6 +125,7 @@ ramips_setup_interfaces()
 	gl-mt300n|\
 	gl-mt750|\
 	hg255d|\
+	i2cd|\
 	mzk-wdpr|\
 	jhr-n805r|\
 	jhr-n825r|\

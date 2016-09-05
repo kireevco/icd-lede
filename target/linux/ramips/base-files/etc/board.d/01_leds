@@ -198,6 +198,11 @@ ht-tm02)
 	ucidef_set_led_netdev "eth" "Ethernet" "$board:green:lan" "eth0"
 	set_wifi_led "$board:blue:wlan"
 	;;
+i2cd)
+	ucidef_set_led_default "status" "status" "$board:green:status" "1"
+	set_wifi_led "$board:green:wifi"
+	set_usb_led "$board:green:usb"
+	;;
 m2m)
 	set_wifi_led "$board:blue:wifi"
 	ucidef_set_led_netdev "eth" "Ethernet" "$board:green:wan" "eth0"
