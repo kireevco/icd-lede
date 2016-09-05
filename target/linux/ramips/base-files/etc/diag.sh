@@ -124,6 +124,9 @@ get_status_led() {
 	timecloud)
 		status_led="$board:orange:status"
 		;;
+	i2cd)
+		status_led="$board:white:status"
+		;;
 	hc5*61|\
 	jhr-n805r|\
 	jhr-n926r|\

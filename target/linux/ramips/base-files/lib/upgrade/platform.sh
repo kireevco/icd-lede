@@ -67,6 +67,7 @@ platform_check_image() {
 	hpm|\
 	ht-tm02|\
 	hw550-3g|\
+	i2cd|\
 	ip2202|\
 	jhr-n805r|\
 	jhr-n825r|\
