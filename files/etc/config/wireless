@@ -1,0 +1,25 @@
+
+config wifi-device  radio0
+        option type     mac80211
+        option channel  auto
+        option hwmode   11g
+        option path     'platform/10180000.wmac'
+        option htmode   HT20
+
+config wifi-iface  ap
+        option device   radio0
+        option ifname   wlan0
+        option mode     ap
+        option network  lan
+        option ssid     'LEDE 0000DC'
+        option encryption 'psk2+aes'
+        option key      'EF0000DC'
+
+config wifi-iface  sta
+        option device   radio0
+        option ifname   wlan1
+        option mode     sta
+        option network  wan
+        option ssid     FT24
+        option encryption psk2
+        option key      ''
