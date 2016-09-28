@@ -6,8 +6,8 @@
 	compatible = "flo,i2cd", "ralink,mt7620a-soc";
 	model = "Flo I2CD";
 
-	aliases {
-		serial0 = &uart;
+	chosen {
+		bootargs = "console=ttyS1,57600";
 	};
 
 	gpio-keys-polled {
@@ -58,13 +58,6 @@
 	};
 };
 
-&uart {
-	pinctrl-names = "default";
-	pinctrl-0 = <&uartf_pins>;
-
-	status = "okay";
-};
-
 &pinctrl {
 	state_default: pinctrl0 {
 		gpio {
@@ -81,15 +74,25 @@
 	};
 };
 
-&ethernet {
-	mtd-mac-address = <&factory 0x4>;
-	mediatek,portmap = "l";
-};
+&uart {
+	pinctrl-names = "default";
+	pinctrl-0 = <&uartf_pins>;
 
-&wmac {
-	ralink,mtd-eeprom = <&factory 0>;
+	status = "okay";
 };
 
 &sdhci {
 	status = "okay";
+};
+
+&ethernet {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&rgmii1_pins &rgmii2_pins &mdio_pins>;
+	mediatek,portmap = "llllw";
+	mtd-mac-address = <&factory 0x4>;
+};
+
+&wmac {
+	ralink,mtd-eeprom = <&factory 0>;
 };
