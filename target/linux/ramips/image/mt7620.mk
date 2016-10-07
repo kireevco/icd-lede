@@ -338,6 +338,14 @@ define Device/gl-mt750
 endef
 TARGET_DEVICES += gl-mt750
 
+define Device/i2cd
+  DTS := I2CD
+  IMAGE_SIZE := $(ralink_default_fw_size_8M)
+  DEVICE_TITLE := Flo I2CD
+  DEVICE_PACKAGES := kmod-rt2800-soc
+endef
+TARGET_DEVICES += i2cd
+
 define Device/zte-q7
   DTS := ZTE-Q7
   DEVICE_TITLE := ZTE Q7
