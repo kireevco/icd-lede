@@ -43,6 +43,7 @@ ramips_setup_interfaces()
 	dcs-930|\
 	dcs-930l-b1|\
 	ht-tm02|\
+	i2cd|\
 	linkits7688 | \
 	linkits7688d | \
 	m2m|\
