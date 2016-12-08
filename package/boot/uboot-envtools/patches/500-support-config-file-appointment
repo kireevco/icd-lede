@@ -1,0 +1,95 @@
+--- a/tools/env/fw_env.c
++++ b/tools/env/fw_env.c
+@@ -124,6 +124,7 @@ static int parse_config (void);
+ 
+ #if defined(CONFIG_FILE)
+ static int get_config (char *);
++static char *config_file = CONFIG_FILE;
+ #endif
+ static inline ulong getenvsize (void)
+ {
+@@ -246,6 +247,19 @@ int fw_printenv (int argc, char *argv[])
+ 	int i, n_flag;
+ 	int rc = 0;
+ 
++#ifdef CONFIG_FILE
++	if (argc >= 2 && strcmp(argv[1], "-c") == 0) {
++		if (argc < 3) {
++			fprintf(stderr,
++				"## Error: '-c' option requires the config file to use\n");
++			return -1;
++		}
++		config_file = argv[2];
++		argv += 2;
++		argc -= 2;
++	}
++#endif
++
+ 	if (0 && argc >= 2 && strcmp(argv[1], "-a") == 0) {
+ 		if (argc < 3) {
+ 			fprintf(stderr,
+@@ -486,6 +500,19 @@ int fw_setenv(int argc, char *argv[])
+ 	char *name;
+ 	char *value = NULL;
+ 
++#ifdef CONFIG_FILE
++	if (argc >= 2 && strcmp(argv[1], "-c") == 0) {
++		if (argc < 3) {
++			fprintf(stderr,
++				"## Error: '-c' option requires the config file to use\n");
++			return -1;
++		}
++		config_file = argv[2];
++		argv += 2;
++		argc -= 2;
++	}
++#endif
++
+ 	if (argc < 2) {
+ 		errno = EINVAL;
+ 		return -1;
+@@ -1364,9 +1391,9 @@ static int parse_config ()
+ 
+ #if defined(CONFIG_FILE)
+ 	/* Fills in DEVNAME(), ENVSIZE(), DEVESIZE(). Or don't. */
+-	if (get_config (CONFIG_FILE)) {
++	if (get_config (config_file)) {
+ 		fprintf (stderr,
+-			"Cannot parse config file: %s\n", strerror (errno));
++			"Cannot parse config file '%s': %s\n", config_file, strerror (errno));
+ 		return -1;
+ 	}
+ #else
+--- a/tools/env/fw_env_main.c
++++ b/tools/env/fw_env_main.c
+@@ -50,8 +50,13 @@ void usage(void)
+ 
+ 	fprintf(stderr, "fw_printenv/fw_setenv, "
+ 		"a command line interface to U-Boot environment\n\n"
++#ifndef CONFIG_FILE
+ 		"usage:\tfw_printenv [-a key] [-n] [variable name]\n"
+ 		"\tfw_setenv [-a key] [variable name] [variable value]\n"
++#else
++		"usage:\tfw_printenv [-c /my/fw_env.config] [-a key] [-n] [variable name]\n"
++		"\tfw_setenv [-c /my/fw_env.config] [-a key] [variable name] [variable value]\n"
++#endif
+ 		"\tfw_setenv -s [ file ]\n"
+ 		"\tfw_setenv -s - < [ file ]\n\n"
+ 		"The file passed as argument contains only pairs "
+@@ -98,12 +103,15 @@ int main(int argc, char *argv[])
+ 		cmdname = p + 1;
+ 	}
+ 
+-	while ((c = getopt_long (argc, argv, "a:ns:h",
++	while ((c = getopt_long (argc, argv, "a:c:ns:h",
+ 		long_options, NULL)) != EOF) {
+ 		switch (c) {
+ 		case 'a':
+ 			/* AES key, handled later */
+ 			break;
++		case 'c':
++			/* handled later */
++			break;
+ 		case 'n':
+ 			/* handled in fw_printenv */
+ 			break;
