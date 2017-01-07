@@ -9,7 +9,7 @@ dependencies:
     - "~/docker"
 
   override:
-    - ./build_scripts/build.sh
+    - docker-compose run mt7620
 
 test:
   override:
