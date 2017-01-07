@@ -23,8 +23,7 @@ RUN apt-get update -y -q && apt-get install -y -q \
   wget \
   subversion \
   python \
-  xz-utils \
-  sudo
+  xz-utils
 
 
 WORKDIR /root/
