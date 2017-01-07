@@ -4,4 +4,4 @@
 
 set -euo pipefail
 
-docker-compose run test
+echo "Dry run test"
