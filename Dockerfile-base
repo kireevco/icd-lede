@@ -32,5 +32,5 @@ RUN mv feeds.conf.default feeds.conf
 RUN echo src-git i2cd https://github.com/FloTechnologies/icd-feed.git >> feeds.conf
 RUN ./scripts/feeds update
 RUN ./scripts/feeds install -a
-
+RUN cp feeds/i2cd/i2cd_config .config
 
