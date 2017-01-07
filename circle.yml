@@ -12,7 +12,8 @@ dependencies:
     - ./build_scripts/install_dependencies.sh
 
   override:
-    - docker-compose run mt7620
+    - ./build_scripts/build.sh
+
 
 test:
   override:

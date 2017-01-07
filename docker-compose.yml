@@ -5,9 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile-base
-      args:
-        BINTRAY_USER: "${BINTRAY_USER}"
-        BINTRAY_KEY: "${BINTRAY_KEY}"
     container_name: lede-build
     image: flotechnologies/lede-build
     environment:
