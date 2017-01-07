@@ -1,0 +1,31 @@
+machine:
+  pre:
+    - curl -ssl https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+
+  override:
+    - ./build_scripts/build.sh
+
+test:
+  override:
+    - ./build_scripts/test.sh
+
+deployment:
+  development:
+    branch: [dev]
+    owner: FloTechnologies
+    commands:
+      - ./build_scripts/deploy_development.sh:
+          timeout: 1200
+  production:
+      branch: [master]
+      owner: FloTechnologies
+      commands:
+        - ./build_scripts/deploy_development.sh:
+            timeout: 1200
+
