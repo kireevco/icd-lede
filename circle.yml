@@ -14,12 +14,12 @@ dependencies:
   override:
     # Run build. Timeout needed for gcc build and other long-running tasks
     - ./build_scripts/build.sh:
-      timeout: 4800
+        timeout: 4800
 
 test:
   override:
-    - ./build_scripts/test.sh
-      timeout: 1200
+    - ./build_scripts/test.sh:
+        timeout: 1200
 
 deployment:
   development:
