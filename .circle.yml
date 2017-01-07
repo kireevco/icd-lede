@@ -23,9 +23,9 @@ deployment:
       - ./build_scripts/deploy_development.sh:
           timeout: 1200
   production:
-      branch: [master]
-      owner: FloTechnologies
-      commands:
-        - ./build_scripts/deploy_development.sh:
-            timeout: 1200
+    branch: [master]
+    owner: FloTechnologies
+    commands:
+      - ./build_scripts/deploy_development.sh:
+          timeout: 1200
 
