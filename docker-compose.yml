@@ -17,7 +17,7 @@ services:
     container_name: lede-build
     depends_on:
       - lede-build
-    command: make -j4 V=99
+    command: make -j8 V=s
     volumes:
       - ./artifacts:/root/bin/targets
     environment:
