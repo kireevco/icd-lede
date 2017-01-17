@@ -19,7 +19,7 @@ services:
       - lede-build
     command: make -j8 V=s
     volumes:
-      - ./artifacts:/root/bin/targets
+      - ./bin/targets:/root/bin/targets
       - ./build_dir:/root/build_dir
     environment:
       FORCE_UNSAFE_CONFIGURE: 1
